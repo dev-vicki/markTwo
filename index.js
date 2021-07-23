@@ -122,3 +122,82 @@ const quiz = [
     take: "c",
   },
 ];
+
+//play game function
+function play(ask, take) {
+  const usertake = readLineSync.question(chalk.yellow.bold(ask));
+  if (usertake.toUpperCase() === take.toUpperCase()) {
+    console.log(chalk.green.bold("Your right! "));
+    score = score + 5;
+  }
+  else {
+    console.log(chalk.red.bold("You missed it! wrong! "));
+    score = score - 3;
+  }
+
+  //Displaying cheering message's for player according to points scored
+  if (score === 10) {
+    console.log(chalk.cyan.bold("Good"))
+  } else if (score === 20) {
+    console.log(chalk.cyan.bold("Nice"))
+  } else if (score === 30) {
+    console.log(chalk.cyan.bold("Well done"))
+  } else if (score === 40) {
+    console.log(chalk.cyan.bold("Awesome"))
+  } else if (score === 50) {
+    console.log(chalk.cyan.bold("Great"))
+  } else if (score === 60) {
+    console.log(chalk.cyan.bold("It's Amazing, Are you an addict of this series? bcz i can get to know from your points."))
+  } else if (score === 70) {
+    console.log(chalk.cyan.bold("It's Marvelous, you have Binged almost every episode's."))
+  }
+  console.log("Current score :", score);
+  console.log("----------------------")
+}
+
+// Highest scorer's Database
+const highScore = [{
+  name: "Vicki",
+  oldScore: 40
+}, {
+  name: "pavi",
+  oldScore: 35
+}]
+
+//Comparing player score with highest scorer's
+function highScoreHandler() {
+  if (score > highScore[0].oldScore) {
+    console.log("You got a high score than Vicki and grabbed first place in this game")
+  } else if (score > highScore[1].oldScore) {
+    console.log("You got a high score than pavi and grabbed second place in this game")
+  } else {
+    console.log("Good game!")
+  }
+  for (let j = 0; j < highScore.length; j++) {
+    console.log(highScore[j].name + ' score is : ' + highScore[j].oldScore);
+  }
+}
+
+//player instructions about quiz
+if (userName) {
+  console.log(chalk.cyan.bold("Hello! " + userName + ". Welcome to Shinchan's World."));
+  console.log(chalk.blue.bold("In this game for every correct takewer you get five points and for every wrong takewer you will loose three point."))
+  console.log(chalk.bold.green("LETS GET STARTED!"))
+  for (let i = 0; i < data.length; i++) {
+    play(data[i].ask, data[i].take);
+  }
+  console.log(chalk.cyan("Hey " + chalk.bold(userName.toUpperCase()) + " your total score is: ", chalk.bold(score)));
+  highScoreHandler();
+
+} else {
+  console.log("Please Enter Your Name!")
+}
+
+const input = readLineSync.question("Do you want to play again?");
+
+//To play again.
+if (input.toLowerCase() === "yes") {
+  for (let i = 0; i < quiz.length; i++) {
+    play(quiz[i].ask, quiz[i].take);
+  }
+}
