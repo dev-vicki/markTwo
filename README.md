@@ -1,4 +1,4 @@
-# A simple CLI based quiz app using Node.js
+# A fun based quiz app on Shinchan Anime!
 
 ## packages used
 - readline-sync
